@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.onebit.hackjack.entity.Apbd;
+import com.onebit.hackjack.entity.Program;
 import com.onebit.hackjack.entity.Trayek;
 import com.onebit.hackjack.entity.Urusan;
 
@@ -258,6 +259,7 @@ public class HackJkt {
 			public void onFailure(int statusCode, Throwable error,
 					String content) {
 				Log.e("ERROR_RESPONSE", content + "");
+				callback.onFailure(statusCode, error, content);
 			}
 
 			@Override
@@ -274,6 +276,43 @@ public class HackJkt {
 						new ArrayList<Urusan>(Arrays.asList(urusanResponse
 								.getResult())), urusanResponse.getTotal(),
 						urusanResponse.getTime());
+			}
+
+		});
+	}
+	
+	/*
+	 * ===================================================================
+	 * PROGRAM API
+	 * ===================================================================
+	 */
+	
+	public static void getListProgram(int tahun, final HackJktCallback<Program> callback){
+		String urlProgram = BASE_URL + "apbd/program/" + Integer.toString(tahun)
+				+ "?apiKey=" + API_KEY;
+		async.get(urlProgram, new AsyncHttpResponseHandler() {
+
+			@Override
+			public void onFailure(int statusCode, Throwable error,
+					String content) {
+				Log.e("ERROR_RESPONSE", content + "");
+				callback.onFailure(statusCode, error, content);
+			}
+
+			@Override
+			public void onStart() {
+				Log.d("START_REQUEST", "getListUrusan() run");
+			}
+
+			@Override
+			public void onSuccess(int statusCode, String content) {
+				Log.d("SUCCESS_RESPONSE", Integer.toString(statusCode) + "");
+				ProgramResponse programResponse = gson.fromJson(content,
+						ProgramResponse.class);
+				callback.onSuccess(
+						new ArrayList<Program>(Arrays.asList(programResponse
+								.getResult())), programResponse.getTotal(),
+						programResponse.getTime());
 			}
 
 		});
