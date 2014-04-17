@@ -2,16 +2,16 @@ package com.onebit.hackjack.rest;
 
 import java.io.Serializable;
 
-import com.onebit.hackjack.entity.Urusan;
+import com.onebit.hackjack.entity.Skpd;
 
-public class UrusanResponse implements Serializable {
+public class SkpdResponse implements Serializable {
 
-	// define variable
-	private static final long serialVersionUID = 7678;
+	// define attribute
+	private static final long serialVersionUID = 3289;
 	private int total;
 	private int currentPageTotal;
 	private String time;
-	private Urusan[] result;
+	private Skpd[] result;
 	
 	// define getter
 	public int getTotal() {
@@ -20,7 +20,7 @@ public class UrusanResponse implements Serializable {
 	public int getCurrentPageTotal() {
 		return currentPageTotal;
 	}
-	public Urusan[] getResult() {
+	public Skpd[] getResult() {
 		return result;
 	}
 	public String getTime() {
@@ -34,7 +34,7 @@ public class UrusanResponse implements Serializable {
 	public void setCurrentPageTotal(int currentPageTotal) {
 		this.currentPageTotal = currentPageTotal;
 	}
-	public void setResult(Urusan[] result) {
+	public void setResult(Skpd[] result) {
 		this.result = result;
 	}
 	public void setTime(String time) {
